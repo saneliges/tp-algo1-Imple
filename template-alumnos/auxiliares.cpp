@@ -19,3 +19,31 @@ bool posYaJugada(jugadas& j, pos p){
         }
     }
 }
+
+vector<pair<int,int>> casillerosParaGanar(tablero& t){
+    vector<pair<int,int>> c_ganar = { };
+    for(int fila = 0; fila<=t.size(); fila=fila+1){
+        for(int col = 0; col <= t[0].size(); col=col+1){
+            if(not(t[fila][col])){
+                c_ganar.push_back(make_pair(t[fila],t[col]));
+            }
+        }
+    }
+    return(c_ganar)
+}
+
+bool posEnBanderitas(pos p, banderitas& b){
+    bool resultado = false;
+    for(int i = 0; i<=b.size(), i=i+1){
+        if (p == banderitas[i]){
+            resultado=true;
+        }
+    }
+    return resultado;
+}
+
+void agregarPosAJugadas(tablero& t, banderitas& b, pos p, jugadas& j){
+    if(not(tablero[pos[0]][pos[1]]) & not(posEnBanderitas) & not(posYaJugada())){
+        jugadas.push_back(make_pair(p,minasAdyacentes(t,p)));
+    }
+}
