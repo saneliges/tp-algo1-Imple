@@ -7,12 +7,13 @@
 #include "gtest/gtest.h"
 
 using namespace std;
-vector<vector<int>> mat = {
-        {0,0,0,0},
-        {0,0,0,0},
-        {0,0,0,0}
-};
 
-vector<int> pos = {3,2};
-
-cout << minasAdyacentes(mat, pos) << endl;
+TEST(minasAdyacentesTEST, ochoBombas) {
+    tablero t = {{true, true, true},
+                 {true, false, true},
+                 {true, true , true}};
+    pos p = make_pair(2,2);
+    int result = minasAdyacentes(t,p);
+    EXPECT_EQ(8, result);
+    cout<< result;
+}

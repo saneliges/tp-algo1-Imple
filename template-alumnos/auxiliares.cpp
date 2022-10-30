@@ -13,11 +13,34 @@
 using namespace std;
 
 bool posYaJugada(jugadas& j, pos p){
+    bool result = false;
     for(int i = 0; i<=j.size(); i=i+1){
-        if(j[i][0]==p){
-            return(true);
+        if(j[i].first==p){
+            result = true;
+            return(result);
         }
     }
+    return(result);
+}
+
+bool tableroValido(tablero& t){
+    bool result = (t.size()==t[0].size()) && (t.size() >= 3);
+    return result;
+}
+
+tablero matrizAmpliada(tablero& t){
+    tablero t_ampliada;
+    for(int i = 0 ; i<t.size()+1; i++){
+        for(int j = 0 ; j <=t[0].size()+1 ; j++){
+            if(i==0 || j == 0 || i == t.size() || j == t[0].size()){
+                t_ampliada[i][j] = false;
+            }
+            else{
+                t_ampliada[i][j] = true;
+            }
+        }
+    }
+    return t_ampliada;
 }
 
 vector<pair<int,int>> casillerosParaGanar(tablero& t){
@@ -25,17 +48,17 @@ vector<pair<int,int>> casillerosParaGanar(tablero& t){
     for(int fila = 0; fila<=t.size(); fila=fila+1){
         for(int col = 0; col <= t[0].size(); col=col+1){
             if(not(t[fila][col])){
-                c_ganar.push_back(make_pair(t[fila],t[col]));
+                c_ganar.push_back(make_pair(fila,col));
             }
         }
     }
-    return(c_ganar)
+    return(c_ganar);
 }
 
 bool posEnBanderitas(pos p, banderitas& b){
     bool resultado = false;
-    for(int i = 0; i<=b.size(), i=i+1){
-        if (p == banderitas[i]){
+    for(int i = 0; i<=b.size(); i=i+1){
+        if (p == b[i]){
             resultado=true;
         }
     }
@@ -43,7 +66,9 @@ bool posEnBanderitas(pos p, banderitas& b){
 }
 
 void agregarPosAJugadas(tablero& t, banderitas& b, pos p, jugadas& j){
-    if(not(tablero[pos[0]][pos[1]]) & not(posEnBanderitas) & not(posYaJugada())){
-        jugadas.push_back(make_pair(p,minasAdyacentes(t,p)));
+    bool pos_bande = posEnBanderitas(p, b);
+    bool pos_jugada = posYaJugada(j, p);
+    if( not pos_bande && not pos_jugada && not(t[p.first][p.second])) {
+        j.push_back(make_pair(p,minasAdyacentes(t,p)));
     }
 }
