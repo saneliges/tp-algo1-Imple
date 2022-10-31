@@ -29,16 +29,13 @@ bool tableroValido(tablero& t){
 }
 
 tablero matrizAmpliada(tablero& t){
-    tablero t_ampliada;
-    for(int i = 0 ; i<t.size()+1; i++){
-        for(int j = 0 ; j <=t[0].size()+1 ; j++){
-            if(i==0 || j == 0 || i == t.size() || j == t[0].size()){
-                t_ampliada[i][j] = false;
-            }
-            else{
-                t_ampliada[i][j] = true;
-            }
-        }
+    tablero t_ampliada = t;
+    vector<bool> v_f(t.size(), false);
+    t_ampliada.push_back(v_f);
+    t_ampliada.insert(t_ampliada.begin(), v_f);
+    for(int i = 0; i< t.size()+2; i++){
+        t_ampliada[i].push_back(false);
+        t_ampliada[i].insert(t_ampliada[i].cbegin(), false);
     }
     return t_ampliada;
 }

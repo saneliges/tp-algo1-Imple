@@ -12,8 +12,9 @@ TEST(minasAdyacentesTEST, ochoBombas) {
     tablero t = {{true, true, true},
                  {true, false, true},
                  {true, true , true}};
-    pos p = make_pair(2,2);
+    pos p = make_pair(1,1);
     int result = minasAdyacentes(t,p);
-    EXPECT_EQ(8, result);
     cout<< result;
+    ASSERT_EQ(8, result);
 }
+

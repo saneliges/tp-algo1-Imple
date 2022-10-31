@@ -18,12 +18,10 @@ using namespace std;
 int minasAdyacentes(tablero& t, pos p) {
     int contador = 0;
     tablero t_aux = matrizAmpliada(t);
- /*** Para que funciónen la estructura for(for(...)) tiene que darse que la matriz sea como minimo de 3x3
-  * o seguro que salta error. deberiamos agregar un if(tablero de 3x3) antes?***/
     if(tableroValido(t)){
-        for (int fila = -1; fila <= 1; fila = fila + 1) {
-            for (int col = -1; col <= 1; col = col + 1) {
-                if (fila != 0 | col != 0 & t[p.first + fila][(p.second + col)]) {
+        for (int fila = -1; fila <= 1; fila++) {
+            for (int col = -1; col <= 1; col++) {
+                if ( ((fila != 0) || (col != 0 )) && t[p.first + fila][(p.second + col)]) {
                     contador = contador + 1;
                 }
             }
@@ -67,18 +65,16 @@ bool perdio(tablero& t, jugadas& j) {
 /******++++**************************** EJERCICIO gano ***********+++***********************/
 bool gano(tablero& t, jugadas& j) {
     vector<pair<int,int>> c_ganar = casillerosParaGanar(t);
-    bool resultado;
-    if(not(perdio(t,j))){
-        bool resultado = true;
-        for (int i = 0; i <= c_ganar.size(); i = i + 1) {
-            int cas_para_ganar_jugados = std::count(j.begin(), j.end(), c_ganar[i]);
-            if (cas_para_ganar_jugados != 0) {
-                resultado = false;
+    int cont_casParaGanarEnJugadas = 0;
+    bool resultado = cont_casParaGanarEnJugadas == c_ganar.size();
+
+    for(int i = 0; i < c_ganar.size(); i++ ) {
+        for(int k = 0; k < j.size(); k++ ){
+            if( j[k].first == c_ganar[i]){
+                    cont_casParaGanarEnJugadas = cont_casParaGanarEnJugadas + 1;
+
             }
         }
-    }
-    else{
-        resultado = false;
     }
     return resultado;
 }
