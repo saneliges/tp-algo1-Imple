@@ -42,8 +42,8 @@ tablero matrizAmpliada(tablero& t){
 
 vector<pair<int,int>> casillerosParaGanar(tablero& t){
     vector<pair<int,int>> c_ganar = { };
-    for(int fila = 0; fila<=t.size(); fila=fila+1){
-        for(int col = 0; col <= t[0].size(); col=col+1){
+    for(int fila = 0; fila<t.size(); fila=fila+1){
+        for(int col = 0; col < t[0].size(); col=col+1){
             if(not(t[fila][col])){
                 c_ganar.push_back(make_pair(fila,col));
             }

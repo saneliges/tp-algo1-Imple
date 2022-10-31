@@ -7,7 +7,7 @@
 #include "gtest/gtest.h"
 
 using namespace std;
-TEST(posConBanderitaPreviaYNoJugada, cambiarBanderitasTest){
+TEST(cambiarBanderitasTest, posConBanderitaPreviaYNoJugada){
     tablero t = {{true, false, false},
                {true, false, false},
                {false, false, false}};

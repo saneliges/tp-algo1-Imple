@@ -19,9 +19,9 @@ int minasAdyacentes(tablero& t, pos p) {
     int contador = 0;
     tablero t_aux = matrizAmpliada(t);
     if(tableroValido(t)){
-        for (int fila = -1; fila <= 1; fila++) {
-            for (int col = -1; col <= 1; col++) {
-                if ( ((fila != 0) || (col != 0 )) && t[p.first + fila][(p.second + col)]) {
+        for (int fila = 0; fila <= 2; fila++) {
+            for (int col = 0; col <= 2; col++) { /***con el "metodo" de la matriz ampliada se corren los indices de fila y columna en 1***/
+                if ( ((fila != 1) || (col != 1 )) && t_aux[p.first + fila][(p.second + col)]) {
                     contador = contador + 1;
                 }
             }
@@ -29,6 +29,7 @@ int minasAdyacentes(tablero& t, pos p) {
     }
     else{
         cout<< "El tablero no es valido"<< endl;
+        contador = -1;
     }
     return contador;
 }
@@ -41,7 +42,7 @@ void cambiarBanderita(tablero& t, jugadas& j, pos p, banderitas& b) {
  banderita, si esto pasa SALIMOS DEL CICLO y sacamos la banderita en la posición marcada.*************/
         if(b[i] == p){
             b.erase(b.begin()+i);
-            i=b.size()+1;
+            return;
         }
     }
 /********* cuando salimos del ciclo nos fijamos si la posición no se jugo y si la posicion no esta jugada
@@ -66,7 +67,6 @@ bool perdio(tablero& t, jugadas& j) {
 bool gano(tablero& t, jugadas& j) {
     vector<pair<int,int>> c_ganar = casillerosParaGanar(t);
     int cont_casParaGanarEnJugadas = 0;
-    bool resultado = cont_casParaGanarEnJugadas == c_ganar.size();
 
     for(int i = 0; i < c_ganar.size(); i++ ) {
         for(int k = 0; k < j.size(); k++ ){
@@ -76,7 +76,7 @@ bool gano(tablero& t, jugadas& j) {
             }
         }
     }
-    return resultado;
+    return (cont_casParaGanarEnJugadas == c_ganar.size());
 }
 
 /******++++**************************** EJERCICIO jugarPlus ***********+++***********************/
